@@ -1,0 +1,13 @@
+--- gst-plugins-bad-0.10.21/configure.ac.orig	2006-05-04 17:18:42.000000000 +0200
++++ gst-plugins-bad-0.10.21/configure.ac	2006-05-21 20:21:48.752716750 +0200
+@@ -388,8 +388,8 @@
+   AG_GST_CHECK_LIBHEADER(DTS, dca, dca_init, $LIBM, dca.h,
+     DTS_LIBS="-ldca $LIBM", HAVE_DTS="no")
+   if test $HAVE_DTS = "no"; then
+-    AG_GST_CHECK_LIBHEADER(DTS, dts_pic, dts_init, $LIBM, dts.h,
+-      [ DTS_LIBS="-ldts_pic $LIBM"
++    AG_GST_CHECK_LIBHEADER(DTS, dts, dts_init, $LIBM, dts.h,
++      [ DTS_LIBS="-ldts $LIBM"
+         AC_DEFINE(DTS_OLD, 1, [Define if an old libdts is used])
+       ])
+   fi

@@ -1,0 +1,20 @@
+--- gst-plugins-bad-0.10.6/configure.ac~	2008-02-21 15:24:00.000000000 +0100
++++ gst-plugins-bad-0.10.6/configure.ac	2008-02-21 15:55:33.786497575 +0100
+@@ -772,16 +772,7 @@
+   PKG_CHECK_MODULES(TIMIDITY, libtimidity, [
+     HAVE_TIMIDITY="yes",
+ 	AC_MSG_CHECKING([for timidity.cfg])
+-	timidity_cfg=""
+-	if test -r /etc/timidity.cfg; then
+-	  timidity_cfg=/etc/timidity.cfg
+-	elif test -r /etc/timidity/timidity.cfg; then
+-	  timidity_cfg=/etc/timidity/timidity.cfg
+-	elif test -r /usr/share/timidity/timidity.cfg; then
+-	  timidity_cfg=/usr/share/timidity/timidity.cfg
+-	elif test -r /usr/local/share/timidity/timidity.cfg; then
+-	  timidity_cfg=/usr/local/share/timidity/timidity.cfg
+-	fi
++	timidity_cfg="/etc/timidity.cfg"
+ 	if test "x$timidity_cfg" != "x"; then
+ 	  AC_MSG_RESULT($timidity_cfg)
+       AC_DEFINE_UNQUOTED(TIMIDITY_CFG, "$timidity_cfg", [Define location of timidity.cfg])

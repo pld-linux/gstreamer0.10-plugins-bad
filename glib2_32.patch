@@ -1,0 +1,24 @@
+--- gst-plugins-bad-0.10.23/ext/spc/tag.c.orig	2012-05-01 11:03:52.249682126 +0200
++++ gst-plugins-bad-0.10.23/ext/spc/tag.c	2012-05-01 11:04:32.379676085 +0200
+@@ -16,10 +16,7 @@
+  * Boston, MA 02111-1307, USA.
+  */
+ 
+-#include <glib/gstring.h>
+-#include <glib/gtypes.h>
+-#include <glib/gmem.h>
+-#include <glib/gprintf.h>
++#include <glib.h>
+ 
+ #include <tag.h>
+ #include <string.h>
+--- gst-plugins-bad-0.10.23/ext/spc/tag.h.orig	2012-05-01 11:03:56.579680685 +0200
++++ gst-plugins-bad-0.10.23/ext/spc/tag.h	2012-05-01 11:04:14.333847263 +0200
+@@ -16,7 +16,6 @@
+  * Boston, MA 02111-1307, USA.
+  */
+ 
+-#include <glib/gtypes.h>
+ #include <glib.h>
+ 
+ typedef struct

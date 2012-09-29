@@ -1,0 +1,11 @@
+diff -uNr gst-plugins-bad-0.10.23/docs/plugins/gst-plugins-bad-plugins-docs.sgml gst-plugins-bad-0.10.23.new/docs/plugins/gst-plugins-bad-plugins-docs.sgml
+--- gst-plugins-bad-0.10.23/docs/plugins/gst-plugins-bad-plugins-docs.sgml	2011-12-30 19:24:26.000000000 +0100
++++ gst-plugins-bad-0.10.23.new/docs/plugins/gst-plugins-bad-plugins-docs.sgml	2012-09-29 15:19:33.449242759 +0200
+@@ -221,7 +221,6 @@
+     <xi:include href="xml/plugin-wildmidi.xml" />
+     <xi:include href="xml/plugin-xvid.xml" />
+     <xi:include href="xml/plugin-voaacenc.xml" />
+-    <xi:include href="xml/plugin-voamrwbenc.xml" />
+     <xi:include href="xml/plugin-vp8.xml" />
+     <xi:include href="xml/plugin-zbar.xml" />
+   </chapter>

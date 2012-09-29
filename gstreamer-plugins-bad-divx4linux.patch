@@ -1,0 +1,59 @@
+--- gst-plugins-bad-0.10.1/ext/divx/gstdivxdec.h.orig	2005-12-19 15:40:22.000000000 +0100
++++ gst-plugins-bad-0.10.1/ext/divx/gstdivxdec.h	2006-02-25 01:04:28.560232500 +0100
+@@ -21,7 +21,7 @@
+ #define __GST_DIVXDEC_H__
+ 
+ #include <gst/gst.h>
+-#include <decore.h>
++#include <divx/decore.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+--- gst-plugins-bad-0.10.1/ext/divx/gstdivxenc.c.orig	2005-12-19 15:40:22.000000000 +0100
++++ gst-plugins-bad-0.10.1/ext/divx/gstdivxenc.c	2006-02-25 01:04:46.369345500 +0100
+@@ -24,7 +24,7 @@
+ #include <string.h>
+ #include "gstdivxenc.h"
+ #include <gst/video/video.h>
+-#include <encore2.h>
++#include <divx/encore2.h>
+ 
+ /* elementfactory information */
+ GstElementDetails gst_divxenc_details = {
+--- gst-plugins-bad-0.10.3/configure.ac.orig	2006-05-21 20:22:12.474199250 +0200
++++ gst-plugins-bad-0.10.3/configure.ac	2006-05-21 20:23:11.165867250 +0200
+@@ -317,14 +317,14 @@
+ translit(dnm, m, l) AM_CONDITIONAL(USE_DIVX, true)
+ GST_CHECK_FEATURE(DIVX, [divx plugins], divx, [
+   HAVE_DIVX=yes
+-  AC_CHECK_HEADER(encore2.h, , [
++  AC_CHECK_HEADER(divx/encore2.h, , [
+     AC_MSG_WARN([Divx4linux encore headers not found])
+     HAVE_DIVX=no
+   ])
+   if [ test x$HAVE_DIVX = xyes ]; then
+     AC_MSG_CHECKING([Checking for valid divx4linux encore version])
+     AC_TRY_COMPILE([
+-#include <encore2.h>
++#include <divx/encore2.h>
+ #if ENCORE_VERSION != 20021024
+ #error Wrong version of divx encore libraries
+ #endif
+@@ -340,7 +340,7 @@
+     ])
+   fi
+   if [ test x$HAVE_DIVX = xyes ]; then
+-    AC_CHECK_HEADER(decore.h, , [
++    AC_CHECK_HEADER(divx/decore.h, , [
+       AC_MSG_WARN([Divx4linux decoder headers not found])
+       HAVE_DIVX=no
+     ])
+@@ -348,7 +348,7 @@
+   if [ test x$HAVE_DIVX = xyes ]; then
+     AC_MSG_CHECKING([Checking for valid divx4linux decore version])
+     AC_TRY_COMPILE([
+-#include <decore.h>
++#include <divx/decore.h>
+ #if DECORE_VERSION != 20021112
+ #error Wrong version of divx decore libraries
+ #endif
