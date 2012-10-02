@@ -31,7 +31,7 @@ Summary:	Bad GStreamer Streaming-media framework plugins
 Summary(pl.UTF-8):	Złe wtyczki do środowiska obróbki strumieni GStreamer
 Name:		gstreamer0.10-plugins-bad
 Version:	0.10.23
-Release:	4
+Release:	5
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
@@ -669,8 +669,8 @@ ukrywanie strat pakietów.
 Summary:	GStreamer SPC plugin
 Summary(pl.UTF-8):	Wtyczka SPC dla GStreamera
 Group:		Libraries
-Requires:	gstreamer-plugins-base >= %{gstpb_req_ver}
-Requires:	libopenspc0.10 >= 0.3.99
+Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Requires:	libopenspc >= 0.3.99
 
 %description -n gstreamer0.10-spc
 GStreamer Plugin for playing SPC files using OpenSPC library.
