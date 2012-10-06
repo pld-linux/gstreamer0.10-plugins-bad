@@ -1,0 +1,25 @@
+--- gst-plugins-bad-0.10.23/ext/directfb/dfb-example.c.orig	2011-12-11 19:49:11.000000000 +0100
++++ gst-plugins-bad-0.10.23/ext/directfb/dfb-example.c	2012-10-06 07:35:52.391061571 +0200
+@@ -1,5 +1,9 @@
+ 
+ #include <directfb.h>
++/* defined by directfb.h to __attribute__((__no_instrument_function__)), glib expects it to be undefined */
++#ifdef __no_instrument_function__
++#  undef __no_instrument_function__
++#endif
+ #include <stdio.h>
+ #include <gst/gst.h>
+ 
+--- gst-plugins-bad-0.10.23/tests/examples/directfb/gstdfb.c.orig	2011-12-11 19:49:22.000000000 +0100
++++ gst-plugins-bad-0.10.23/tests/examples/directfb/gstdfb.c	2012-10-06 07:59:46.691031676 +0200
+@@ -36,6 +36,10 @@
+ #include <time.h>
+ 
+ #include <directfb.h>
++/* defined by directfb.h to __attribute__((__no_instrument_function__)), glib expects it to be undefined */
++#ifdef __no_instrument_function__
++#  undef __no_instrument_function__
++#endif
+ #include <gst/gst.h>
+ #include <string.h>
+ 
