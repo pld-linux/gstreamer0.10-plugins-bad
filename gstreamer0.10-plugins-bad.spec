@@ -31,7 +31,7 @@ Summary:	Bad GStreamer Streaming-media framework plugins
 Summary(pl.UTF-8):	Złe wtyczki do środowiska obróbki strumieni GStreamer
 Name:		gstreamer0.10-plugins-bad
 Version:	0.10.23
-Release:	7
+Release:	8
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
@@ -105,9 +105,9 @@ BuildRequires:	libmusicbrainz-devel >= 2.1.0
 BuildRequires:	libpng-devel >= 2:1.2.0
 BuildRequires:	librsvg-devel >= 2.14
 BuildRequires:	librtmp-devel
+BuildRequires:	libsndfile-devel >= 1.0.16
 # for decklink, modplug, soundtouch
 BuildRequires:	libstdc++-devel
-BuildRequires:	libsndfile-devel >= 1.0.16
 BuildRequires:	libtheora-devel >= 1.0
 BuildRequires:	libtiger-devel >= 0.3.2
 BuildRequires:	libtimidity-devel
@@ -117,8 +117,8 @@ BuildRequires:	libx264-devel >= 0.1.2
 BuildRequires:	nas-devel
 %{?with_neon:BuildRequires:	neon-devel >= 0.27.0}
 %if %{with opencv}
-BuildRequires:	opencv-devel >= 1:2.2.0
 BuildRequires:	opencv-devel < 1:2.5.0
+BuildRequires:	opencv-devel >= 1:2.2.0
 %endif
 BuildRequires:	openssl-devel >= 0.9.5
 BuildRequires:	opus-devel >= 0.9.4
@@ -185,6 +185,7 @@ Summary:	GStreamer plugin for AAC audio encoding and decoding
 Summary(pl.UTF-8):	Wtyczka do GStreamera do kodowania i dekodowania plików audio AAC
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-aac < 1.0
 
 %description -n gstreamer0.10-aac
 GStreamer plugin for AAC audio encoding and decoding.
@@ -199,6 +200,7 @@ Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	vo-amrwbenc >= 0.1.0
+Obsoletes:	gstreamer-amrwbenc < 1.0
 
 %description -n gstreamer0.10-amrwbenc
 GStreamer plugin for AMR-WB audio encoding, using VisualOn library.
@@ -213,6 +215,7 @@ Summary(pl.UTF-8):	Wtyczka do GStreamera do renderowania napisów ASS/SSA
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	libass >= 0.9.4
+Obsoletes:	gstreamer-ass < 1.0
 
 %description -n gstreamer0.10-ass
 GStreamer plugin for ASS/SSA subtitles rendering.
@@ -226,6 +229,7 @@ Summary(pl.UTF-8):	Złe wtyczki efektów dźwiękowych do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Obsoletes:	gstreamer-audio-effects
+Obsoletes:	gstreamer-audio-effects-bad < 1.0
 
 %description -n gstreamer0.10-audio-effects-bad
 Bad GStreamer audio effects plugins.
@@ -239,6 +243,7 @@ Summary(pl.UTF-8):	Wtyczka wyjścia dźwięku NAS dla GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Provides:	gstreamer0.10-audiosink = %{version}
+Obsoletes:	gstreamer-audiosink-nas < 1.0
 Obsoletes:	gstreamer-nas
 
 %description -n gstreamer0.10-audiosink-nas
@@ -252,6 +257,7 @@ Summary:	GStreamer plugin for CD audio input using libcdaudio
 Summary(pl.UTF-8):	Wtyczka do GStreamera odtwarzająca płyty CD-Audio przy użyciu libcdaudio
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-cdaudio < 1.0
 
 %description -n gstreamer0.10-cdaudio
 Plugin for playing audio tracks using libcdaudio under GStreamer.
@@ -264,8 +270,9 @@ libcdaudio.
 Summary:	GStreamer Celt audio codec plugin
 Summary(pl.UTF-8):	Wtyczka kodeka dźwięku Celt do GStreamera
 Group:		Libraries
-Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	celt >= 0.11.0
+Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-celt < 1.0
 
 %description -n gstreamer0.10-celt
 GStreamer Celt audio encoder and decoder plugin.
@@ -277,8 +284,9 @@ Wtyczka GStreamera kodująca i dekodująca dźwięk w formacie Celt.
 Summary:	GStreamer cURL network sink plugin
 Summary(pl.UTF-8):	Wtyczka wyjścia sieciowego cURL dla GStreamera
 Group:		Libraries
-Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	curl-libs >= 7.21.0
+Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-curl < 1.0
 
 %description -n gstreamer0.10-curl
 GStreamer network sink plugin that uses libcurl as a client to upload
@@ -293,6 +301,7 @@ Summary:	GStreamer 1394 IIDC (Firewire digital cameras) video source plugin
 Summary(pl.UTF-8):	Wtyczka źródła obrazu 1394 IIDC (z kamer cyfrowych Firewire) do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-dc1394 < 1.0
 
 %description -n gstreamer0.10-dc1394
 GStreamer 1394 IIDC (Firewire digital cameras) video source plugin.
@@ -307,6 +316,7 @@ Summary(pl.UTF-8):	Wtyczka Dirac do GStreamera
 Group:		Libraries
 Requires:	dirac >= 0.10
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-dirac < 1.0
 
 %description -n gstreamer0.10-dirac
 GStreamer Dirac video decoder/encoder plugin.
@@ -319,6 +329,7 @@ Summary:	GStreamer divx plugin
 Summary(pl.UTF-8):	Wtyczka divx do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-divx < 1.0
 
 %description -n gstreamer0.10-divx
 GStreamer divx plugin.
@@ -331,6 +342,7 @@ Summary:	GStreamer DTS plugin
 Summary(pl.UTF-8):	Wtyczka DTS do GStreamera
 Group:		Libraries
 Requires:	gstreamer-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-dts < 1.0
 
 %description -n gstreamer0.10-dts
 Plugin for DTS Coherent Acoustics support.
@@ -343,6 +355,7 @@ Summary:	GStreamer Flite plugin
 Summary(pl.UTF-8):	Wtyczka Flite do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-flite < 1.0
 
 %description -n gstreamer0.10-flite
 Plugin for Flite support.
@@ -355,6 +368,7 @@ Summary:	GStreamer GME Audio Decoder plugin
 Summary(pl.UTF-8):	Wtyczka dekodująca GME do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-gme < 1.0
 
 %description -n gstreamer0.10-gme
 GStreamer GME Audio Decoder plugin.
@@ -368,6 +382,7 @@ Summary(pl.UTF-8):	Wtyczka GSettings do GStreamera
 Group:		Libraries
 Requires:	glib2 >= 1:2.26
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-gsettings < 1.0
 
 %description -n gstreamer0.10-gsettings
 GStreamer GSettings plugin.
@@ -380,6 +395,7 @@ Summary:	GStreamer plugin for GSM lossy audio format
 Summary(pl.UTF-8):	Wtyczka do GStreamera obsługująca stratny format dźwięku GSM
 Group:		Libraries
 Requires:	gstreamer-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-gsm < 1.0
 
 %description -n gstreamer0.10-gsm
 Output plugin for GStreamer to convert to GSM lossy audio format.
@@ -395,6 +411,7 @@ Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	libkate >= 0.1.7
 Requires:	libtiger >= 0.3.2
+Obsoletes:	gstreamer-kate < 1.0
 
 %description -n gstreamer0.10-kate
 GStreamer plugin for Kate text streams.
@@ -407,6 +424,7 @@ Summary:	GStreamer wrapper for LADSPA plugins
 Summary(pl.UTF-8):	Wrapper do wtyczek LADSPA dla GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-ladspa < 1.0
 
 %description -n gstreamer0.10-ladspa
 Plugin which wraps LADSPA plugins for use by GStreamer applications.
@@ -421,6 +439,7 @@ Summary(pl.UTF-8):	Wrapper do wtyczek LV2 dla GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	slv2 >= 0.6.6
+Obsoletes:	gstreamer-lv2 < 1.0
 
 %description -n gstreamer0.10-lv2
 Plugin which wraps LV2 plugins for use by GStreamer applications.
@@ -434,6 +453,7 @@ Summary:	GStreamer Mimic video decoding/encoding plugin
 Summary(pl.UTF-8):	Wtyczka kodująca/dekodująca obraz Mimic do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-mimic < 1.0
 
 %description -n gstreamer0.10-mimic
 GStreamer Mimic video decoding/encoding plugin.
@@ -447,6 +467,7 @@ Summary(pl.UTF-8):	Wtyczka mpeg2enc do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	mjpegtools-libs >= 2.0.0
+Obsoletes:	gstreamer-mjpegtools < 1.0
 
 %description -n gstreamer0.10-mjpegtools
 GStreamer mpeg2enc plugin (based on mjpegtools libraries).
@@ -460,6 +481,7 @@ Summary(pl.UTF-8):	Wtyczka mms do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	libmms >= 0.4
+Obsoletes:	gstreamer-mms < 1.0
 
 %description -n gstreamer0.10-mms
 GStreamer mms plugin.
@@ -472,6 +494,7 @@ Summary:	GStreamer musepack plugin
 Summary(pl.UTF-8):	Wtyczka musepack do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-musepack < 1.0
 
 %description -n gstreamer0.10-musepack
 GStreamer musepack plugin.
@@ -484,6 +507,7 @@ Summary:	GStreamer MythTV plugin
 Summary(pl.UTF-8):	Wtyczka MythTV do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-mythtv < 1.0
 
 %description -n gstreamer0.10-mythtv
 GStreamer MythTV plugin.
@@ -496,6 +520,7 @@ Summary:	GStreamer musicbrainz plugin
 Summary(pl.UTF-8):	Wtyczka musicbrainz do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-musicbrainz < 1.0
 
 %description -n gstreamer0.10-musicbrainz
 GStreamer musicbrainz plugin - a TRM signature producer.
@@ -509,6 +534,7 @@ Summary(pl.UTF-8):	Wtyczka źródła HTTP neon do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	neon >= 0.27.0
+Obsoletes:	gstreamer-neon < 1.0
 
 %description -n gstreamer0.10-neon
 GStreamer neon HTTP source plugin.
@@ -522,6 +548,7 @@ Summary(pl.UTF-8):	Wtyczka odcisków OFA do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	libofa >= 0.9.3
+Obsoletes:	gstreamer-ofa < 1.0
 
 %description -n gstreamer0.10-ofa
 GStreamer OFA plugin to calculate MusicIP fingerprints from audio
@@ -538,6 +565,7 @@ Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Provides:	gstreamer0.10-audiosink = %{version}
+Obsoletes:	gstreamer-openal < 1.0
 
 %description -n gstreamer0.10-openal
 GStreamer OpenAL support plugin, providing audio sink and source.
@@ -552,6 +580,7 @@ Summary(pl.UTF-8):	Wtyczka OpenCV do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	opencv >= 1:2.2.0
+Obsoletes:	gstreamer-opencv < 1.0
 
 %description -n gstreamer0.10-opencv
 GStreamer OpenCV plugin. It contains the following elements:
@@ -572,6 +601,7 @@ Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	opus >= 0.9.4
+Obsoletes:	gstreamer-opus < 1.0
 
 %description -n gstreamer0.10-opus
 GStreamer OPUS audio decoder/encoder plugin.
@@ -586,6 +616,7 @@ Group:		Libraries
 # for locales
 Requires:	%{name} = %{version}-%{release}
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-resindvd < 1.0
 
 %description -n gstreamer0.10-resindvd
 GStreamer Resin DVD playback plugin.
@@ -598,6 +629,7 @@ Summary:	RTMP stream input plugin for GStreamer
 Summary(pl.UTF-8):	Wtyczka strumieni wejściowych RTMP dla GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-rtmp < 1.0
 Conflicts:	gstreamer-plugins-bad < 0.10.22
 
 %description -n gstreamer0.10-rtmp
@@ -616,6 +648,7 @@ Summary(pl.UTF-8):	Wtyczka Schroedinger do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	schroedinger >= 1.0.7
+Obsoletes:	gstreamer-schroedinger < 1.0
 Obsoletes:	gstreamer-schroedinger = 1.0.7
 
 %description -n gstreamer0.10-schroedinger
@@ -632,6 +665,7 @@ Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	libsndfile >= 1.0.16
+Obsoletes:	gstreamer-sndfile < 1.0
 
 %description -n gstreamer0.10-sndfile
 GStreamer sndfile source plugin.
@@ -645,6 +679,7 @@ Summary(pl.UTF-8):	Wtyczka soundtouch do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	soundtouch >= 1.4
+Obsoletes:	gstreamer-soundtouch < 1.0
 
 %description -n gstreamer0.10-soundtouch
 GStreamer soundtouch source plugin - audio pitch controller.
@@ -658,6 +693,7 @@ Summary(pl.UTF-8):	Wtyczka SpanDSP do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	spandsp >= 0.0.6
+Obsoletes:	gstreamer-spandsp < 1.0
 
 %description -n gstreamer0.10-spandsp
 GStreamer SpanDSP plugin - audio effect that allows packet loss
@@ -673,6 +709,7 @@ Summary(pl.UTF-8):	Wtyczka SPC dla GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	libopenspc >= 0.3.99
+Obsoletes:	gstreamer-spc < 1.0
 
 %description -n gstreamer0.10-spc
 GStreamer Plugin for playing SPC files using OpenSPC library.
@@ -687,6 +724,7 @@ Summary(pl.UTF-8):	Wtyczka renderująca animacje flash dla GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	swfdec >= 0.3.6
+Obsoletes:	gstreamer-swfdec < 1.0
 
 %description -n gstreamer0.10-swfdec
 Plugin for rendering Flash animations using swfdec library.
@@ -699,6 +737,7 @@ Summary:	teletextdec plugin for GStreamer
 Summary(pl.UTF-8):	Wtyczka teletextdec do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-teletextdec < 1.0
 
 %description -n gstreamer0.10-teletextdec
 Teletext decoder plugin for GStreamer.
@@ -711,6 +750,7 @@ Summary:	timidity plugin for GStreamer
 Summary(pl.UTF-8):	Wtyczka timidity do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-timidity < 1.0
 
 %description -n gstreamer0.10-timidity
 timidity plugin for GStreamer.
@@ -725,10 +765,11 @@ Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Provides:	gstreamer0.10-videosink = %{version}
 Obsoletes:	gstreamer-SDL
+Obsoletes:	gstreamer-videosink-sdl < 1.0
 
 %description -n gstreamer0.10-videosink-sdl
 Plugin for sending output to the Simple Direct Media architecture.
-(http://www.libsdl.org/). Usefull for fullscreen playback.
+<http://www.libsdl.org/). Usefull for fullscreen playback.
 
 %description -n gstreamer0.10-videosink-sdl -l pl.UTF-8
 Wtyczka przekazująca wyjście do architektury SDL. Użyteczna do
@@ -740,6 +781,7 @@ Summary(pl.UTF-8):	Wtyczka wyjścia obrazu DirectFB do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Provides:	gstreamer0.10-videosink = %{version}
+Obsoletes:	gstreamer-videosink-videosink-directfb < 1.0
 
 %description -n gstreamer0.10-videosink-directfb
 GStreamer DirectFB output plugin.
@@ -754,6 +796,7 @@ Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	vo-aacenc >= 0.1.0
+Obsoletes:	gstreamer-videosink-voaacenc < 1.0
 
 %description -n gstreamer0.10-voaacenc
 AAC audio encoder plugin for GStreamer using VisualOn library.
@@ -767,6 +810,7 @@ Summary:	GStreamer VP8 encoding and decoding plugin
 Summary(pl.UTF-8):	Wtyczka kodująca i dekodująca VP8 dla GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-videosink-vp8 < 1.0
 
 %description -n gstreamer0.10-vp8
 GStreamer VP8 encoding and decoding plugin.
@@ -779,6 +823,7 @@ Summary:	wildmidi plugin for GStreamer
 Summary(pl.UTF-8):	Wtyczka wildmidi do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Obsoletes:	gstreamer-videosink-wildmidi < 1.0
 
 %description -n gstreamer0.10-wildmidi
 wildmidi plugin for GStreamer.
@@ -791,6 +836,7 @@ Summary:	GStreamer xvid decoder plugin
 Summary(pl.UTF-8):	Wtyczka do GStreamera dekodująca przy użyciu biblioteki xvid
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Obsoletes:	gstreamer-videosink-xvid < 1.0
 
 %description -n gstreamer0.10-xvid
 GStreamer xvid decoder plugin.
@@ -804,6 +850,7 @@ Summary(pl.UTF-8):	Wtyczka do GStreamera skanująca kody kreskowe
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	zbar >= 0.9
+Obsoletes:	gstreamer-videosink-zbar < 1.0
 
 %description -n gstreamer0.10-zbar
 GStreamer ZBar barcode scanner plugin.
