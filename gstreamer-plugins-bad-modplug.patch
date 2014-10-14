@@ -1,0 +1,11 @@
+--- gst-plugins-bad-0.10.23/ext/modplug/gstmodplug.cc~	2012-01-18 13:32:55.000000000 +0100
++++ gst-plugins-bad-0.10.23/ext/modplug/gstmodplug.cc	2014-10-14 21:12:59.823141962 +0200
+@@ -50,7 +50,7 @@
+ #define WORDS_BIGENDIAN 0
+ #endif
+ 
+-#include <stdafx.h>
++#include <libmodplug/stdafx.h>
+ #include <libmodplug/sndfile.h>
+ 
+ #include "gstmodplug.h"

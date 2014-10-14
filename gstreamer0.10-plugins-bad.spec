@@ -31,7 +31,7 @@ Summary:	Bad GStreamer Streaming-media framework plugins
 Summary(pl.UTF-8):	Złe wtyczki do środowiska obróbki strumieni GStreamer
 Name:		gstreamer0.10-plugins-bad
 Version:	0.10.23
-Release:	15
+Release:	16
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
@@ -45,6 +45,7 @@ Patch5:		docs-voamrwbenc.patch
 Patch6:		gstreamer-plugins-bad-directfb.patch
 Patch7:		gstreamer-plugins-bad-opencv.patch
 Patch8:		gst-neon.patch
+Patch9:		gstreamer-plugins-bad-modplug.patch
 URL:		http://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
@@ -870,6 +871,7 @@ Wtyczka do GStreamera skanująca kody kreskowe.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 %{__libtoolize}
