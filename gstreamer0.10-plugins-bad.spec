@@ -50,7 +50,7 @@ URL:		http://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gettext-devel >= 0.17
+BuildRequires:	gettext-tools >= 0.17
 # 2.22 for all, gio-2.26 for gsettings
 BuildRequires:	glib2-devel >= 1:2.26
 BuildRequires:	gstreamer0.10-devel >= %{gst_req_ver}
