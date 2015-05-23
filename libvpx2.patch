@@ -1,0 +1,10 @@
+--- gst-plugins-bad-0.10.23/ext/vp8/gstvp8utils.h~	2011-12-11 19:49:11.000000000 +0100
++++ gst-plugins-bad-0.10.23/ext/vp8/gstvp8utils.h	2015-05-24 00:06:51.244136379 +0200
+@@ -22,6 +22,7 @@
+ 
+ #include <gst/gst.h>
+ #include <vpx/vpx_codec.h>
++#include <vpx/vpx_image.h>
+ 
+ G_BEGIN_DECLS
+ 
