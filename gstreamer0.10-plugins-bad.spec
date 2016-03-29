@@ -12,7 +12,7 @@
 %bcond_without	musepack	# don't build musepack plugin
 %bcond_without	neon		# don't build neonhttpsrc plugin
 %bcond_without	ofa		# don't build OFA plugin
-%bcond_without	opencv		# don't build OpenCV plugin
+%bcond_with	opencv		# don't build OpenCV plugin
 %bcond_without	sdl		# don't build sdl plugin
 %bcond_with	swfdec		# swfdec plugin
 %bcond_without	spc		# don't build spc plugin
@@ -31,7 +31,7 @@ Summary:	Bad GStreamer Streaming-media framework plugins
 Summary(pl.UTF-8):	Złe wtyczki do środowiska obróbki strumieni GStreamer
 Name:		gstreamer0.10-plugins-bad
 Version:	0.10.23
-Release:	19
+Release:	20
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
