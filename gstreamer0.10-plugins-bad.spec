@@ -31,7 +31,7 @@ Summary:	Bad GStreamer Streaming-media framework plugins
 Summary(pl.UTF-8):	Złe wtyczki do środowiska obróbki strumieni GStreamer
 Name:		gstreamer0.10-plugins-bad
 Version:	0.10.23
-Release:	25
+Release:	26
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
@@ -47,7 +47,8 @@ Patch7:		gstreamer-plugins-bad-opencv.patch
 Patch8:		gst-neon.patch
 Patch9:		gstreamer-plugins-bad-modplug.patch
 Patch10:	libvpx2.patch
-Patch11:	gtk-doc.patch
+Patch11:	gstreamer-common-gtkdoc.patch
+Patch12:	gstreamer-plugins-bad-orc.patch
 URL:		http://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
@@ -114,7 +115,7 @@ BuildRequires:	libsndfile-devel >= 1.0.16
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtheora-devel >= 1.0
 BuildRequires:	libtiger-devel >= 0.3.2
-BuildRequires:	libtimidity-devel
+BuildRequires:	libtimidity-devel >= 0.2
 BuildRequires:	libvpx-devel
 BuildRequires:	libx264-devel >= 0.1.2
 %{?with_mjpegtools:BuildRequires:	mjpegtools-devel >= 2.0.0}
@@ -754,6 +755,7 @@ Summary:	timidity plugin for GStreamer
 Summary(pl.UTF-8):	Wtyczka timidity do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
+Requires:	libtimidity >= 0.2
 Obsoletes:	gstreamer-timidity < 1.0
 
 %description -n gstreamer0.10-timidity
@@ -875,6 +877,8 @@ Wtyczka do GStreamera skanująca kody kreskowe.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch12 -p1
+cd common
 %patch11 -p1
 
 %build
@@ -896,6 +900,7 @@ Wtyczka do GStreamera skanująca kody kreskowe.
 	%{!?with_musepack:--disable-musepack} \
 	%{!?with_neon:--disable-neon} \
 	%{!?with_ofa:--disable-ofa} \
+	%{!?with_opencv:--disable-opencv} \
 	%{!?with_sdl:--disable-sdl} \
 	%{!?with_sdl:--disable-sdltest} \
 	%{!?with_spc:--disable-spc} \
