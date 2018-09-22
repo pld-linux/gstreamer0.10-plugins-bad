@@ -1,0 +1,66 @@
+diff -urN gst-plugins-bad-0.10.23.org/sys/directsound/gstdirectsoundsrc.c gst-plugins-bad-0.10.23/sys/directsound/gstdirectsoundsrc.c
+--- gst-plugins-bad-0.10.23.org/sys/directsound/gstdirectsoundsrc.c	2011-12-30 19:24:33.000000000 +0100
++++ gst-plugins-bad-0.10.23/sys/directsound/gstdirectsoundsrc.c	2018-09-22 18:19:07.658651138 +0200
+@@ -2,7 +2,7 @@
+  * GStreamer
+  * Copyright 2005 Thomas Vander Stichele <thomas@apestaart.org>
+  * Copyright 2005 Ronald S. Bultje <rbultje@ronald.bitfreak.net>
+- * Copyright 2005 Sébastien Moutte <sebastien@moutte.net>
++ * Copyright 2005 Sbastien Moutte <sebastien@moutte.net>
+  * Copyright 2006 Joni Valtanen <joni.valtanen@movial.fi>
+  * 
+  * Permission is hereby granted, free of charge, to any person obtaining a
+diff -urN gst-plugins-bad-0.10.23.org/sys/directsound/gstdirectsoundsrc.h gst-plugins-bad-0.10.23/sys/directsound/gstdirectsoundsrc.h
+--- gst-plugins-bad-0.10.23.org/sys/directsound/gstdirectsoundsrc.h	2011-12-11 19:49:14.000000000 +0100
++++ gst-plugins-bad-0.10.23/sys/directsound/gstdirectsoundsrc.h	2018-09-22 18:19:07.661984577 +0200
+@@ -2,7 +2,7 @@
+  * GStreamer
+  * Copyright 2005 Thomas Vander Stichele <thomas@apestaart.org>
+  * Copyright 2005 Ronald S. Bultje <rbultje@ronald.bitfreak.net>
+- * Copyright 2005 Sébastien Moutte <sebastien@moutte.net>
++ * Copyright 2005 Sbastien Moutte <sebastien@moutte.net>
+  * Copyright 2006 Joni Valtanen <joni.valtanen@movial.fi>
+  * 
+  * Permission is hereby granted, free of charge, to any person obtaining a
+diff -urN gst-plugins-bad-0.10.23.org/sys/winks/kshelpers.c gst-plugins-bad-0.10.23/sys/winks/kshelpers.c
+--- gst-plugins-bad-0.10.23.org/sys/winks/kshelpers.c	2011-12-11 19:49:15.000000000 +0100
++++ gst-plugins-bad-0.10.23/sys/winks/kshelpers.c	2018-09-22 18:19:07.618649875 +0200
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2008 Ole André Vadla Ravnås <ole.andre.ravnas@tandberg.com>
++ * Copyright (C) 2008 Ole Andr Vadla Ravns <ole.andre.ravnas@tandberg.com>
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Library General Public
+diff -urN gst-plugins-bad-0.10.23.org/sys/winks/kshelpers.h gst-plugins-bad-0.10.23/sys/winks/kshelpers.h
+--- gst-plugins-bad-0.10.23.org/sys/winks/kshelpers.h	2011-12-11 19:49:15.000000000 +0100
++++ gst-plugins-bad-0.10.23/sys/winks/kshelpers.h	2018-09-22 18:19:07.611982998 +0200
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2008 Ole André Vadla Ravnås <ole.andre.ravnas@tandberg.com>
++ * Copyright (C) 2008 Ole Andr Vadla Ravns <ole.andre.ravnas@tandberg.com>
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Library General Public
+diff -urN gst-plugins-bad-0.10.23.org/sys/winks/ksvideohelpers.c gst-plugins-bad-0.10.23/sys/winks/ksvideohelpers.c
+--- gst-plugins-bad-0.10.23.org/sys/winks/ksvideohelpers.c	2011-12-11 19:49:15.000000000 +0100
++++ gst-plugins-bad-0.10.23/sys/winks/ksvideohelpers.c	2018-09-22 18:19:07.601982682 +0200
+@@ -1,6 +1,6 @@
+ /*
+  * Copyright (C) 2007 Haakon Sporsheim <hakon.sporsheim@tandberg.com>
+- *               2008 Ole André Vadla Ravnås <ole.andre.ravnas@tandberg.com>
++ *               2008 Ole Andr Vadla Ravns <ole.andre.ravnas@tandberg.com>
+  *               2009 Knut Inge Hvidsten <knut.inge.hvidsten@tandberg.com>
+  *
+  * This library is free software; you can redistribute it and/or
+diff -urN gst-plugins-bad-0.10.23.org/sys/winks/ksvideohelpers.h gst-plugins-bad-0.10.23/sys/winks/ksvideohelpers.h
+--- gst-plugins-bad-0.10.23.org/sys/winks/ksvideohelpers.h	2011-12-11 19:49:15.000000000 +0100
++++ gst-plugins-bad-0.10.23/sys/winks/ksvideohelpers.h	2018-09-22 18:19:07.628650190 +0200
+@@ -1,6 +1,6 @@
+ /*
+  * Copyright (C) 2007 Haakon Sporsheim <hakon.sporsheim@tandberg.com>
+- *               2008 Ole André Vadla Ravnås <ole.andre.ravnas@tandberg.com>
++ *               2008 Ole Andr Vadla Ravns <ole.andre.ravnas@tandberg.com>
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Library General Public

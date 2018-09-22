@@ -1,0 +1,52 @@
+--- gst-plugins-bad-0.10.23/ext/apexsink/gstapexraop.c~	2018-09-22 17:27:06.000000000 +0200
++++ gst-plugins-bad-0.10.23/ext/apexsink/gstapexraop.c	2018-09-22 17:28:24.899555435 +0200
+@@ -676,7 +676,7 @@ gst_apexraop_write (GstApExRAOP * con, g
+   guchar *buffer, *frame_data;
+   gushort len;
+   gint bit_offset, byte_offset, i, out_len, res;
+-  EVP_CIPHER_CTX aes_ctx;
++  EVP_CIPHER_CTX *aes_ctx;
+   _GstApExRAOP *conn = (_GstApExRAOP *) con;
+   const int frame_header_size = conn->generation == GST_APEX_GENERATION_ONE
+       ? GST_APEX_RAOP_FRAME_HEADER_SIZE : GST_APEX_RTP_FRAME_HEADER_SIZE;
+@@ -736,13 +736,13 @@ gst_apexraop_write (GstApExRAOP * con, g
+         &bit_offset, &byte_offset);
+   }
+ 
+-  EVP_CIPHER_CTX_init (&aes_ctx);
+-  EVP_CipherInit_ex (&aes_ctx, EVP_aes_128_cbc (), NULL, conn->aes_ky,
++  aes_ctx = EVP_CIPHER_CTX_new ();
++  EVP_CipherInit_ex (aes_ctx, EVP_aes_128_cbc (), NULL, conn->aes_ky,
+       conn->aes_iv, AES_ENCRYPT);
+-  EVP_CipherUpdate (&aes_ctx, frame_data, &out_len, frame_data, /*( */
++  EVP_CipherUpdate (aes_ctx, frame_data, &out_len, frame_data, /*( */
+       GST_APEX_RAOP_ALAC_HEADER_SIZE +
+       length /*) / AES_BLOCK_SIZE * AES_BLOCK_SIZE */ );
+-  EVP_CIPHER_CTX_cleanup (&aes_ctx);
++  EVP_CIPHER_CTX_free (aes_ctx);
+ 
+   res =
+       gst_apexraop_send (conn->data_sd, buffer,
+--- gst-plugins-bad-0.10.23/ext/apexsink/gstapexraop.c~	2018-09-22 17:32:17.000000000 +0200
++++ gst-plugins-bad-0.10.23/ext/apexsink/gstapexraop.c	2018-09-22 17:41:22.253666922 +0200
+@@ -258,7 +258,7 @@ gst_apexraop_connect (GstApExRAOP * con)
+     } v;
+     guchar buf[4 + 8 + 16];
+   } randbuf;
+-  gsize size;
++  gsize size, size2;
+   struct sockaddr_in ioaddr;
+   socklen_t iolen;
+   GstRTSPStatusCode res;
+@@ -292,9 +292,8 @@ gst_apexraop_connect (GstApExRAOP * con)
+ 
+   rsa = RSA_new ();
+   mod = g_base64_decode (GST_APEX_RAOP_RSA_PUBLIC_MOD, &size);
+-  rsa->n = BN_bin2bn (mod, size, NULL);
+-  exp = g_base64_decode (GST_APEX_RAOP_RSA_PUBLIC_EXP, &size);
+-  rsa->e = BN_bin2bn (exp, size, NULL);
++  exp = g_base64_decode (GST_APEX_RAOP_RSA_PUBLIC_EXP, &size2);
++  RSA_set0_key(rsa, BN_bin2bn (mod, size, NULL), BN_bin2bn (exp, size2, NULL), NULL);
+   size =
+       RSA_public_encrypt (AES_BLOCK_SIZE, conn->aes_ky, rsakey, rsa,
+       RSA_PKCS1_OAEP_PADDING);
