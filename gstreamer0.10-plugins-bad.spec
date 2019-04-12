@@ -31,7 +31,7 @@ Summary:	Bad GStreamer Streaming-media framework plugins
 Summary(pl.UTF-8):	Złe wtyczki do środowiska obróbki strumieni GStreamer
 Name:		gstreamer0.10-plugins-bad
 Version:	0.10.23
-Release:	29
+Release:	30
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
@@ -184,6 +184,18 @@ Header files and API documentation for gstapp library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe i dokumentacja API biblioteki gstapp.
+
+%package apidocs
+Summary:	API documentation for GStreamer Plugins Bad
+Summary(pl.UTF-8):	Dokumentacja API GStreamer Plugins Bad
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+API documentation for GStreamer Plugins Bad.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API GStreamer Plugins Bad.
 
 ## Plugins ##
 
@@ -928,6 +940,8 @@ rm -rf $RPM_BUILD_ROOT
 
 # We don't need plugins' *.la files
 %{__rm} $RPM_BUILD_ROOT%{gstlibdir}/*.la
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgst*.la
 
 %find_lang %{gstname}-%{gst_major_ver}
 
@@ -1042,7 +1056,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{gstlibdir}/libgstvideomeasure.so
 %attr(755,root,root) %{gstlibdir}/libgstvmnc.so
 %attr(755,root,root) %{gstlibdir}/libgsty4mdec.so
-%{_gtkdocdir}/gst-plugins-bad-plugins-0.10
 
 %files devel
 %defattr(644,root,root,755)
@@ -1051,11 +1064,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgstcodecparsers-%{gst_major_ver}.so
 %attr(755,root,root) %{_libdir}/libgstphotography-%{gst_major_ver}.so
 %attr(755,root,root) %{_libdir}/libgstsignalprocessor-%{gst_major_ver}.so
-%{_libdir}/libgstbasecamerabinsrc-%{gst_major_ver}.la
-%{_libdir}/libgstbasevideo-%{gst_major_ver}.la
-%{_libdir}/libgstcodecparsers-%{gst_major_ver}.la
-%{_libdir}/libgstphotography-%{gst_major_ver}.la
-%{_libdir}/libgstsignalprocessor-%{gst_major_ver}.la
 %{_includedir}/gstreamer-0.10/gst/basecamerabinsrc
 %{_includedir}/gstreamer-0.10/gst/codecparsers
 %{_includedir}/gstreamer-0.10/gst/interfaces/photography-enumtypes.h
@@ -1070,13 +1078,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/gstreamer-0.10/gst/video/videocontext.h
 %if %{with vdpau}
 %attr(755,root,root) %{_libdir}/libgstvdp-%{gst_major_ver}.so
-%{_libdir}/libgstvdp-%{gst_major_ver}.la
 %{_includedir}/gstreamer-0.10/gst/vdpau
 %endif
 %{_pkgconfigdir}/gstreamer-basevideo-%{gst_major_ver}.pc
 %{_pkgconfigdir}/gstreamer-codecparsers-%{gst_major_ver}.pc
 %{_pkgconfigdir}/gstreamer-plugins-bad-%{gst_major_ver}.pc
+
+%files apidocs
+%defattr(644,root,root,755)
 %{_gtkdocdir}/gst-plugins-bad-libs-0.10
+%{_gtkdocdir}/gst-plugins-bad-plugins-0.10
 
 ##
 ## Plugins
