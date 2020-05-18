@@ -52,6 +52,7 @@ Patch11:	gstreamer-common-gtkdoc.patch
 Patch12:	gstreamer-plugins-bad-orc.patch
 Patch13:	openssl.patch
 Patch14:	doc.patch
+Patch15:	make43.patch
 URL:		http://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
@@ -898,6 +899,7 @@ cd common
 cd ..
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 
 %build
 %{__libtoolize}

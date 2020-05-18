@@ -1,0 +1,26 @@
+diff -urN gst-plugins-bad-0.10.23.orig/common/glib-gen.mak gst-plugins-bad-0.10.23/common/glib-gen.mak
+--- gst-plugins-bad-0.10.23.orig/common/glib-gen.mak	2011-12-11 20:19:22.000000000 +0100
++++ gst-plugins-bad-0.10.23/common/glib-gen.mak	2020-05-18 11:18:40.781868402 +0200
+@@ -5,7 +5,8 @@
+ #glib_enum_define=GST_COLOR_BALANCE
+ #glib_enum_prefix=gst_color_balance
+ 
+-enum_headers=$(foreach h,$(glib_enum_headers),\n\#include \"$(h)\")
++H := \#
++enum_headers=$(foreach h,$(glib_enum_headers),\n$(H)include \"$(h)\")
+ 
+ # these are all the rules generating the relevant files
+ %-marshal.h: %-marshal.list
+diff -urN gst-plugins-bad-0.10.23.orig/common/gst-glib-gen.mak gst-plugins-bad-0.10.23/common/gst-glib-gen.mak
+--- gst-plugins-bad-0.10.23.orig/common/gst-glib-gen.mak	2011-12-11 20:19:22.000000000 +0100
++++ gst-plugins-bad-0.10.23/common/gst-glib-gen.mak	2020-05-18 11:18:54.668481255 +0200
+@@ -6,7 +6,8 @@
+ #glib_gen_prefix=gst_color_balance
+ #glib_gen_basename=colorbalance
+ 
+-enum_headers=$(foreach h,$(glib_enum_headers),\n\#include \"$(h)\")
++H := \#
++enum_headers=$(foreach h,$(glib_enum_headers),\n$(H)include \"$(h)\")
+ 
+ # these are all the rules generating the relevant files
+ $(glib_gen_basename)-marshal.h: $(glib_gen_basename)-marshal.list
