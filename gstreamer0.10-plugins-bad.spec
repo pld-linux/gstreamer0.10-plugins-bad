@@ -1,27 +1,27 @@
 #
 # Conditional build:
-%bcond_with	apidocs		# do not build and package API docs
-%bcond_without	cdaudio		# don't build cdaudio plugin
-%bcond_without	dirac		# don't build Dirac plugin
-%bcond_without	directfb	# don't build directfb videosink plugin
-%bcond_without	dts		# don't build DTS plugin
-%bcond_without	faad		# don't build faad plugin
-%bcond_without	gsm		# don't build gsm plugin
-%bcond_without	ladspa		# don't build ladspa plugin
-%bcond_without	mjpegtools	# don't build mpeg2enc plugin
-%bcond_without	mms		# don't build mms plugin
-%bcond_without	musepack	# don't build musepack plugin
-%bcond_without	neon		# don't build neonhttpsrc plugin
-%bcond_without	ofa		# don't build OFA plugin
-%bcond_with	opencv		# don't build OpenCV plugin
-%bcond_without	sdl		# don't build sdl plugin
+%bcond_without	apidocs		# gtk-doc based API documentation
+%bcond_without	cdaudio		# cdaudio plugin
+%bcond_without	dirac		# Dirac plugin
+%bcond_without	directfb	# directfb videosink plugin
+%bcond_without	dts		# DTS plugin
+%bcond_without	faad		# faad plugin
+%bcond_without	gsm		# gsm plugin
+%bcond_without	ladspa		# ladspa plugin
+%bcond_without	mjpegtools	# mpeg2enc plugin
+%bcond_without	mms		# mms plugin
+%bcond_without	musepack	# musepack plugin
+%bcond_without	neon		# neonhttpsrc plugin
+%bcond_without	ofa		# OFA plugin
+%bcond_with	opencv		# OpenCV plugin
+%bcond_without	sdl		# sdl plugin
 %bcond_with	swfdec		# swfdec plugin
-%bcond_without	spc		# don't build spc plugin
-%bcond_without	wavpack		# don't build wavpack plugin
-%bcond_without	xvid		# don't build XviD plugin
-%bcond_without	amr		# don't build amrwbenc plugin
-%bcond_with	divx4linux	# build divx4linux plugins
-%bcond_without	vdpau		# build without VDPAU
+%bcond_without	spc		# spc plugin
+%bcond_without	wavpack		# wavpack plugin
+%bcond_without	xvid		# XviD plugin
+%bcond_without	amr		# amrwbenc plugin
+%bcond_with	divx4linux	# divx4linux plugins
+%bcond_without	vdpau		# VDPAU library
 
 %define		gstname		gst-plugins-bad
 %define		gst_major_ver	0.10
@@ -35,7 +35,7 @@ Version:	0.10.23
 Release:	34
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
+Source0:	https://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
 # Source0-md5:	fcb09798114461955260e4d940db5987
 Patch0:		gstreamer-plugins-bad-libdts.patch
 Patch1:		gstreamer-plugins-bad-divx4linux.patch
@@ -53,7 +53,8 @@ Patch12:	gstreamer-plugins-bad-orc.patch
 Patch13:	openssl.patch
 Patch14:	doc.patch
 Patch15:	make43.patch
-URL:		http://gstreamer.freedesktop.org/
+Patch16:	gstreamer-plugins-bad-gtkdoc.patch
+URL:		https://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	docbook-dtd412-xml
@@ -68,6 +69,7 @@ BuildRequires:	libtool >= 1.4
 BuildRequires:	orc-devel >= 0.4.11
 BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRequires:	python >= 2.1
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.98
 BuildRequires:	xorg-lib-libX11-devel
 ##
@@ -152,8 +154,8 @@ Requires:	glib2 >= 1:2.26
 Requires:	gstreamer0.10 >= %{gst_req_ver}
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Requires:	orc >= 0.4.11
-Obsoletes:	gstreamer-quicktime
-Obsoletes:	gstreamer-vcd
+Obsoletes:	gstreamer-quicktime < 0.10
+Obsoletes:	gstreamer-vcd < 0.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		gstlibdir 	%{_libdir}/gstreamer-%{gst_major_ver}
@@ -192,6 +194,7 @@ Summary:	API documentation for GStreamer Plugins Bad
 Summary(pl.UTF-8):	Dokumentacja API GStreamer Plugins Bad
 Group:		Documentation
 Requires:	gtk-doc-common
+BuildArch:	noarch
 
 %description apidocs
 API documentation for GStreamer Plugins Bad.
@@ -249,7 +252,7 @@ Summary:	Bad GStreamer audio effects plugins
 Summary(pl.UTF-8):	Złe wtyczki efektów dźwiękowych do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10 >= %{gst_req_ver}
-Obsoletes:	gstreamer-audio-effects
+Obsoletes:	gstreamer-audio-effects < 0.10
 Obsoletes:	gstreamer-audio-effects-bad < 1.0
 
 %description -n gstreamer0.10-audio-effects-bad
@@ -265,7 +268,7 @@ Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Provides:	gstreamer0.10-audiosink = %{version}
 Obsoletes:	gstreamer-audiosink-nas < 1.0
-Obsoletes:	gstreamer-nas
+Obsoletes:	gstreamer-nas < 0.10
 
 %description -n gstreamer0.10-audiosink-nas
 GStreamer NAS audio output plugin.
@@ -786,7 +789,7 @@ Summary(pl.UTF-8):	Wtyczka wyjścia SDL do GStreamera
 Group:		Libraries
 Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
 Provides:	gstreamer0.10-videosink = %{version}
-Obsoletes:	gstreamer-SDL
+Obsoletes:	gstreamer-SDL < 0.10
 Obsoletes:	gstreamer-videosink-sdl < 1.0
 
 %description -n gstreamer0.10-videosink-sdl
@@ -900,6 +903,7 @@ cd ..
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
+%patch16 -p1
 
 %build
 %{__libtoolize}

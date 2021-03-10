@@ -1,0 +1,14 @@
+--- gst-plugins-bad-0.10.23/docs/libs/gst-plugins-bad-libs-docs.sgml.orig	2011-12-30 19:24:25.000000000 +0100
++++ gst-plugins-bad-0.10.23/docs/libs/gst-plugins-bad-libs-docs.sgml	2021-03-10 06:59:48.801449749 +0100
+@@ -46,11 +46,6 @@
+     </chapter>
+   </part>
+ 
+-  <part id="gstreamer-libs-hierarchy">
+-    <title>Object Hierarchy</title>
+-    <xi:include href="xml/tree_index.sgml" />
+-  </part>
+-
+   <index id="api-index-full">
+     <title>Index</title>
+     <xi:include href="xml/api-index-full.xml"><xi:fallback /></xi:include>
