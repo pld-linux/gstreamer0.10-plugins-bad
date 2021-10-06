@@ -10,81 +10,10 @@ along with the 0.10 version.
  gtk-doc.mak         | 11 ++++-------
  2 files changed, 8 insertions(+), 14 deletions(-)
 
-diff --git a/gtk-doc-plugins.mak b/gtk-doc-plugins.mak
-index f69d9d7..f19e7d7 100644
---- a/gtk-doc-plugins.mak
-+++ b/gtk-doc-plugins.mak
-@@ -222,10 +222,7 @@ html-build.stamp: sgml.stamp $(DOC_MAIN_SGML_FILE) $(content_files)
- 	    mkhtml_options="$$mkhtml_options --verbose"; \
- 	  fi; \
- 	fi; \
--	cd html && gtkdoc-mkhtml $$mkhtml_options $(DOC_MODULE) $(DOC_MAIN_SGML_FILE)
--	@mv html/index.sgml html/index.sgml.bak
--	@$(SED) "s/ href=\"$(DOC_MODULE)\// href=\"$(DOC_MODULE)-@GST_MAJORMINOR@\//g" html/index.sgml.bak >html/index.sgml
--	@rm -f html/index.sgml.bak
-+	cd html && gtkdoc-mkhtml $$mkhtml_options $(DOC_MODULE)-@GST_MAJORMINOR@ $(DOC_MAIN_SGML_FILE)
- 	@rm -f html/$(DOC_MAIN_SGML_FILE)
- 	@rm -rf html/xml
- 	@rm -f html/version.entities
-@@ -289,9 +286,9 @@ install-data-local:
- 	      $(INSTALL_DATA) $$i $(DESTDIR)$(TARGET_DIR); \
- 	    done; \
- 	  fi; \
--	  echo '-- Installing $(builddir)/html/$(DOC_MODULE).devhelp2' ; \
--	  if test -e $(builddir)/html/$(DOC_MODULE).devhelp2; then \
--	            $(INSTALL_DATA) $(builddir)/html/$(DOC_MODULE).devhelp2 \
-+	  echo '-- Installing $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2' ; \
-+	  if test -e $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; then \
-+	            $(INSTALL_DATA) $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2 \
- 	            $(DESTDIR)$(TARGET_DIR)/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; \
- 	  fi; \
- 	  $(GTKDOC_REBASE) --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) || true ; \
-diff --git a/gtk-doc.mak b/gtk-doc.mak
-index 17cee71..9d76889 100644
---- a/gtk-doc.mak
-+++ b/gtk-doc.mak
-@@ -130,10 +130,7 @@ html-build.stamp: sgml.stamp $(DOC_MAIN_SGML_FILE) $(content_files)
- 	if test "$(?)" = "0"; then \
- 	  mkhtml_options=--path="$(abs_srcdir)"; \
- 	fi; \
--	cd html && gtkdoc-mkhtml $$mkhtml_options $(MKHTML_OPTIONS) $(DOC_MODULE) ../$(DOC_MAIN_SGML_FILE)
--	@mv html/index.sgml html/index.sgml.bak
--	@$(SED) "s/ href=\"$(DOC_MODULE)\// href=\"$(DOC_MODULE)-@GST_MAJORMINOR@\//g" html/index.sgml.bak >html/index.sgml
--	@rm -f html/index.sgml.bak
-+	cd html && gtkdoc-mkhtml $$mkhtml_options $(MKHTML_OPTIONS) $(DOC_MODULE)-@GST_MAJORMINOR@ ../$(DOC_MAIN_SGML_FILE)
- 	@rm -rf html/xml
- 	@rm -f version.entities
- 	@test "x$(HTML_IMAGES)" = "x" ||  ( cd $(srcdir) && cp $(HTML_IMAGES) $(abs_builddir)/html )
-@@ -189,9 +186,9 @@ install-data-local:
- 	    echo '-- Installing '$$i ; \
- 	    $(INSTALL_DATA) $$i $(DESTDIR)$(TARGET_DIR); \
- 	  done; \
--	  echo '-- Installing $(builddir)/html/$(DOC_MODULE).devhelp2' ; \
--	  if test -e $(builddir)/html/$(DOC_MODULE).devhelp2; then \
--	            $(INSTALL_DATA) $(builddir)/html/$(DOC_MODULE).devhelp2 \
-+	  echo '-- Installing $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2' ; \
-+	  if test -e $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; then \
-+	            $(INSTALL_DATA) $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2 \
- 	            $(DESTDIR)$(TARGET_DIR)/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; \
- 	  fi; \
- 	  $(GTKDOC_REBASE) --relative --dest-dir=$(DESTDIR) --html-dir=$(DESTDIR)$(TARGET_DIR) || true ; \
-From d37af32e2d6d1b546af72978f8441a84996ab3ea Mon Sep 17 00:00:00 2001
-From: Stefan Sauer <ensonic@users.sf.net>
-Date: Sun, 7 Jun 2015 20:12:05 +0200
-Subject: [PATCH] mangle-tmpl.py: generate tmpl files instead of merging
-
-We don't have any hand-written docs in tmpl files. Stop generating them with
-gtkdoc and just write the minimal files ourself.
----
- gtk-doc-plugins.mak | 15 +++--------
- mangle-tmpl.py      | 72 ++++++++++++-----------------------------------------
- 2 files changed, 19 insertions(+), 68 deletions(-)
-
-diff --git a/gtk-doc-plugins.mak b/gtk-doc-plugins.mak
-index 5d9b2f9..767e55a 100644
---- a/gtk-doc-plugins.mak
-+++ b/gtk-doc-plugins.mak
-@@ -171,19 +171,10 @@ scan-build.stamp: $(HFILE_GLOB) $(EXTRA_HFILES) $(basefiles) scanobj-build.stamp
+diff -urNp -x '*.orig' gst-plugins-bad-0.10.23.org/common/gtk-doc-plugins.mak gst-plugins-bad-0.10.23/common/gtk-doc-plugins.mak
+--- gst-plugins-bad-0.10.23.org/common/gtk-doc-plugins.mak	2011-12-30 19:32:24.000000000 +0100
++++ gst-plugins-bad-0.10.23/common/gtk-doc-plugins.mak	2021-10-06 23:28:06.340365779 +0200
+@@ -162,19 +162,10 @@ scan-build.stamp: $(HFILE_GLOB) $(EXTRA_
  	    --ignore-headers="$(IGNORE_HFILES)";			\
  	touch scan-build.stamp
  
@@ -107,10 +36,91 @@ index 5d9b2f9..767e55a 100644
  	@$(PYTHON) \
  		$(top_srcdir)/common/mangle-tmpl.py $(srcdir)/$(INSPECT_DIR) tmpl
  	@touch tmpl-build.stamp
-diff --git a/mangle-tmpl.py b/mangle-tmpl.py
-index 51ea8c2..7a92d04 100644
---- a/mangle-tmpl.py
-+++ b/mangle-tmpl.py
+@@ -192,9 +183,13 @@ sgml-build.stamp: tmpl.stamp scan-build.
+ 		$(top_srcdir)/common/plugins.xsl $$a > xml/`basename $$a`; done
+ 	@for f in $(EXAMPLE_CFILES); do \
+ 		$(PYTHON) $(top_srcdir)/common/c-to-xml.py $$f > xml/element-`basename $$f .c`.xml; done
+-	@gtkdoc-mkdb \
++	@_source_dir='' ;						\
++	for i in $(DOC_SOURCE_DIR) ; do					\
++	    _source_dir="$${_source_dir} --source-dir=$$i" ;	        \
++	done ;								\
++	gtkdoc-mkdb \
+ 		--module=$(DOC_MODULE) \
+-		--source-dir=$(DOC_SOURCE_DIR) \
++		$${_source_dir} \
+ 		 --expand-content-files="$(expand_content_files)" \
+ 		--main-sgml-file=$(srcdir)/$(DOC_MAIN_SGML_FILE) \
+ 		--output-format=xml \
+@@ -223,10 +218,7 @@ html-build.stamp: sgml.stamp $(DOC_MAIN_
+ 	    mkhtml_options="$$mkhtml_options --verbose"; \
+ 	  fi; \
+ 	fi; \
+-	cd html && gtkdoc-mkhtml $$mkhtml_options $(DOC_MODULE) $(DOC_MAIN_SGML_FILE)
+-	@mv html/index.sgml html/index.sgml.bak
+-	@$(SED) "s/ href=\"$(DOC_MODULE)\// href=\"$(DOC_MODULE)-@GST_MAJORMINOR@\//g" html/index.sgml.bak >html/index.sgml
+-	@rm -f html/index.sgml.bak
++	cd html && gtkdoc-mkhtml $$mkhtml_options $(DOC_MODULE)-@GST_MAJORMINOR@ $(DOC_MAIN_SGML_FILE)
+ 	@rm -f html/$(DOC_MAIN_SGML_FILE)
+ 	@rm -rf html/xml
+ 	@rm -f html/version.entities
+@@ -290,9 +282,9 @@ install-data-local:
+ 	      $(INSTALL_DATA) $$i $(DESTDIR)$(TARGET_DIR); \
+ 	    done; \
+ 	  fi; \
+-	  echo '-- Installing $(builddir)/html/$(DOC_MODULE).devhelp2' ; \
+-	  if test -e $(builddir)/html/$(DOC_MODULE).devhelp2; then \
+-	            $(INSTALL_DATA) $(builddir)/html/$(DOC_MODULE).devhelp2 \
++	  echo '-- Installing $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2' ; \
++	  if test -e $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; then \
++	            $(INSTALL_DATA) $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2 \
+ 	            $(DESTDIR)$(TARGET_DIR)/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; \
+ 	  fi; \
+ 	  (which gtkdoc-rebase >/dev/null && \
+diff -urNp -x '*.orig' gst-plugins-bad-0.10.23.org/common/gtk-doc.mak gst-plugins-bad-0.10.23/common/gtk-doc.mak
+--- gst-plugins-bad-0.10.23.org/common/gtk-doc.mak	2011-12-30 19:32:24.000000000 +0100
++++ gst-plugins-bad-0.10.23/common/gtk-doc.mak	2021-10-06 23:28:06.340365779 +0200
+@@ -104,7 +104,11 @@ $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES)
+ 
+ sgml-build.stamp: setup-build.stamp $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(expand_content_files)
+ 	@echo '  DOC   Building XML'
+-	@gtkdoc-mkdb --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR)  --expand-content-files="$(expand_content_files)" --main-sgml-file=$(DOC_MAIN_SGML_FILE) --output-format=xml $(MKDB_OPTIONS)
++	@_source_dir='' ;						\
++	for i in $(DOC_SOURCE_DIR) ; do					\
++	    _source_dir="$${_source_dir} --source-dir=$$i" ;	        \
++	done ;							        \
++	gtkdoc-mkdb --module=$(DOC_MODULE) $${_source_dir}  --expand-content-files="$(expand_content_files)" --main-sgml-file=$(DOC_MAIN_SGML_FILE) --output-format=xml $(MKDB_OPTIONS)
+ 	@cp ../version.entities xml
+ 	@touch sgml-build.stamp
+ 
+@@ -130,10 +134,7 @@ html-build.stamp: sgml.stamp $(DOC_MAIN_
+ 	if test "$(?)" = "0"; then \
+ 	  mkhtml_options=--path="$(abs_srcdir)"; \
+ 	fi; \
+-	cd html && gtkdoc-mkhtml $$mkhtml_options $(MKHTML_OPTIONS) $(DOC_MODULE) ../$(DOC_MAIN_SGML_FILE)
+-	@mv html/index.sgml html/index.sgml.bak
+-	@$(SED) "s/ href=\"$(DOC_MODULE)\// href=\"$(DOC_MODULE)-@GST_MAJORMINOR@\//g" html/index.sgml.bak >html/index.sgml
+-	@rm -f html/index.sgml.bak
++	cd html && gtkdoc-mkhtml $$mkhtml_options $(MKHTML_OPTIONS) $(DOC_MODULE)-@GST_MAJORMINOR@ ../$(DOC_MAIN_SGML_FILE)
+ 	@rm -rf html/xml
+ 	@rm -f version.entities
+ 	@test "x$(HTML_IMAGES)" = "x" ||  ( cd $(srcdir) && cp $(HTML_IMAGES) $(abs_builddir)/html )
+@@ -189,9 +190,9 @@ install-data-local:
+ 	    echo '-- Installing '$$i ; \
+ 	    $(INSTALL_DATA) $$i $(DESTDIR)$(TARGET_DIR); \
+ 	  done; \
+-	  echo '-- Installing $(builddir)/html/$(DOC_MODULE).devhelp2' ; \
+-	  if test -e $(builddir)/html/$(DOC_MODULE).devhelp2; then \
+-	            $(INSTALL_DATA) $(builddir)/html/$(DOC_MODULE).devhelp2 \
++	  echo '-- Installing $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2' ; \
++	  if test -e $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; then \
++	            $(INSTALL_DATA) $(builddir)/html/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2 \
+ 	            $(DESTDIR)$(TARGET_DIR)/$(DOC_MODULE)-@GST_MAJORMINOR@.devhelp2; \
+ 	  fi; \
+ 	  (which gtkdoc-rebase >/dev/null && \
+diff -urNp -x '*.orig' gst-plugins-bad-0.10.23.org/common/mangle-tmpl.py gst-plugins-bad-0.10.23/common/mangle-tmpl.py
+--- gst-plugins-bad-0.10.23.org/common/mangle-tmpl.py	2011-12-11 20:19:22.000000000 +0100
++++ gst-plugins-bad-0.10.23/common/mangle-tmpl.py	2021-10-06 23:28:06.340365779 +0200
 @@ -2,21 +2,12 @@
  # vi:si:et:sw=4:sts=4:ts=4
  
@@ -136,7 +146,7 @@ index 51ea8c2..7a92d04 100644
  import sys
  import os
  
-@@ -28,37 +19,12 @@ def __init__(self, filename):
+@@ -26,37 +17,12 @@ class Tmpl:
          self._sectionids = []
          self._sections = {}
  
@@ -176,7 +186,7 @@ index 51ea8c2..7a92d04 100644
          self._sections[id] = content
  
      def output(self):
-@@ -73,14 +39,10 @@ def output(self):
+@@ -71,14 +37,10 @@ class Tmpl:
  
          return "".join(lines)
  
@@ -192,7 +202,7 @@ index 51ea8c2..7a92d04 100644
          handle = open(self.filename, "w")
          handle.write(self.output())
          handle.close()
-@@ -136,30 +98,28 @@ def main():
+@@ -134,30 +96,28 @@ def main():
      inspectdir = sys.argv[1]
      tmpldir = sys.argv[2]
  
@@ -233,52 +243,3 @@ index 51ea8c2..7a92d04 100644
          tmpl.write()
  
  main()
-From f363b3205658a38e84fa77f19dee218cd4445275 Mon Sep 17 00:00:00 2001
-From: Nicolas Dufresne <nicolas.dufresne@collabora.com>
-Date: Mon, 20 Jun 2016 15:38:01 -0400
-Subject: [PATCH] Fix handling of DOC_SOURCE_DIR list
-
-As some places we where assuming a single directory. This caused some
-plugins documentation to be ignored.
----
- gtk-doc-plugins.mak | 8 ++++++--
- gtk-doc.mak         | 6 +++++-
- 2 files changed, 11 insertions(+), 3 deletions(-)
-
-diff --git a/gtk-doc-plugins.mak b/gtk-doc-plugins.mak
-index fe0977c..4b5dd1b 100644
---- a/gtk-doc-plugins.mak
-+++ b/gtk-doc-plugins.mak
-@@ -179,9 +179,13 @@ sgml-build.stamp: scan-build.stamp $(CFILE_GLOB) $(top_srcdir)/common/plugins.xs
- 		$(top_srcdir)/common/plugins.xsl $$a > xml/`basename $$a`; done
- 	@for f in $(EXAMPLE_CFILES); do \
- 		$(PYTHON) $(top_srcdir)/common/c-to-xml.py $$f > xml/element-`basename $$f .c`.xml; done
--	@gtkdoc-mkdb \
-+	@_source_dir='' ;						\
-+	for i in $(DOC_SOURCE_DIR) ; do					\
-+	    _source_dir="$${_source_dir} --source-dir=$$i" ;	        \
-+	done ;								\
-+	gtkdoc-mkdb \
- 		--module=$(DOC_MODULE) \
--		--source-dir=$(DOC_SOURCE_DIR) \
-+		$${_source_dir} \
- 		 --expand-content-files="$(expand_content_files)" \
- 		--main-sgml-file=$(srcdir)/$(DOC_MAIN_SGML_FILE) \
- 		--output-format=xml \
-diff --git a/gtk-doc.mak b/gtk-doc.mak
-index 2aab3a9..4beebcf 100644
---- a/gtk-doc.mak
-+++ b/gtk-doc.mak
-@@ -121,7 +121,11 @@ $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)
- 
- sgml-build.stamp: setup-build.stamp $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(expand_content_files)
- 	@echo '  DOC   Building XML'
--	@gtkdoc-mkdb --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR)  --expand-content-files="$(expand_content_files)" --main-sgml-file=$(DOC_MAIN_SGML_FILE) --output-format=xml $(MKDB_OPTIONS)
-+	@_source_dir='' ;						\
-+	for i in $(DOC_SOURCE_DIR) ; do					\
-+	    _source_dir="$${_source_dir} --source-dir=$$i" ;	        \
-+	done ;							        \
-+	gtkdoc-mkdb --module=$(DOC_MODULE) $${_source_dir}  --expand-content-files="$(expand_content_files)" --main-sgml-file=$(DOC_MAIN_SGML_FILE) --output-format=xml $(MKDB_OPTIONS)
- 	@cp ../version.entities xml
- 	@touch sgml-build.stamp
- 
