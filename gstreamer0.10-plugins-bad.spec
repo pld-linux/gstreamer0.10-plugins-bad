@@ -32,7 +32,7 @@ Summary:	Bad GStreamer Streaming-media framework plugins
 Summary(pl.UTF-8):	Złe wtyczki do środowiska obróbki strumieni GStreamer
 Name:		gstreamer0.10-plugins-bad
 Version:	0.10.23
-Release:	37
+Release:	38
 License:	LGPL v2+
 Group:		Libraries
 Source0:	https://gstreamer.freedesktop.org/src/gst-plugins-bad/%{gstname}-%{version}.tar.bz2
@@ -427,6 +427,20 @@ Output plugin for GStreamer to convert to GSM lossy audio format.
 %description -n gstreamer0.10-gsm -l pl.UTF-8
 Wtyczka wyjścia dźwięku GSteamera konwertująca do stratnego formatu
 GSM.
+
+%package -n gstreamer0.10-jp2k
+Summary:	GStreamer JP2K plugin
+Summary(pl.UTF-8):	Wtyczka JP2K dla GStreamera
+Group:		Libraries
+Requires:	gstreamer0.10-plugins-base >= %{gstpb_req_ver}
+Conflicts:	gstreamer0.10-plugins-bad < 0.10.23-38
+
+%description -n gstreamer0.10-jp2k
+GStreamer JP2K plugin - JasPer-based JPEG2000 decoder/encoder.
+
+%description -n gstreamer0.10-jp2k -l pl.UTF-8
+Wtyczka JP2K dla GStreamera - koder/dekoder JPEG2000 oparty na
+bibliotece JasPer.
 
 %package -n gstreamer0.10-kate
 Summary:	GStreamer plugin for Kate text streams
@@ -1012,7 +1026,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{gstlibdir}/libgstinterlace.so
 %attr(755,root,root) %{gstlibdir}/libgstinter.so
 %attr(755,root,root) %{gstlibdir}/libgstivfparse.so
-%attr(755,root,root) %{gstlibdir}/libgstjp2k.so
 %attr(755,root,root) %{gstlibdir}/libgstjp2kdecimator.so
 %attr(755,root,root) %{gstlibdir}/libgstjpegformat.so
 %attr(755,root,root) %{gstlibdir}/libgstlegacyresample.so
@@ -1184,6 +1197,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{gstlibdir}/libgstgsm.so
 %endif
+
+%files -n gstreamer0.10-jp2k
+%defattr(644,root,root,755)
+%attr(755,root,root) %{gstlibdir}/libgstjp2k.so
 
 %files -n gstreamer0.10-kate
 %defattr(644,root,root,755)
